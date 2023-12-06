@@ -27,7 +27,7 @@ public class Movie {
     @Column(name="summary",columnDefinition="CHAR(100)")
     private String summary;
 
-    @ManyToMany
-    private List<Genre> genre;
+//    @ManyToMany
+//    private List<Genre> genre;
 
 }

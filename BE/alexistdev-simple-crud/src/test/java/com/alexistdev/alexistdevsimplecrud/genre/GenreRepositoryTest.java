@@ -24,7 +24,7 @@ public class GenreRepositoryTest {
     @BeforeEach
     void setUp() {
         genre = Genre.builder()
-                .id("1")
+                .id(1)
                 .name("horor")
                 .build();
         em.persist(genre);

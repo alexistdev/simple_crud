@@ -14,7 +14,8 @@ import java.util.List;
 @Builder
 public class Genre {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @Column(name="name",unique = true)
     private String name;

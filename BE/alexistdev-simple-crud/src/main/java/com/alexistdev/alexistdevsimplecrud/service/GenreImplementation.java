@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -13,6 +15,7 @@ import java.util.ResourceBundle;
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
+@Service
 public class GenreImplementation implements GenreService{
 
     @Autowired
