@@ -8,4 +8,6 @@ public interface MovieService {
     Movie save(Movie movie) throws Exception;
 
     List<Movie> getAll() throws Exception;
+
+    Movie update(Movie movie, int id) throws Exception;
 }

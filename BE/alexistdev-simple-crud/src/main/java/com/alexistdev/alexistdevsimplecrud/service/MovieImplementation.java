@@ -27,4 +27,18 @@ public class MovieImplementation implements MovieService{
     public List<Movie> getAll() throws Exception {
         return movieRepository.findAll();
     }
+
+    @Override
+    public Movie update(Movie movie, int id) throws Exception {
+        Movie movieData = movieRepository.findById(id).orElse(null);
+        if(movieData == null){
+           throw new Exception("Not Found");
+        }
+        movieData.setSummary(movie.getSummary());
+        movieData.setGenres(movie.getGenres());
+        movieData.setDirector(movie.getDirector());
+        movieData.setTitle(movie.getTitle());
+        movieRepository.save(movieData);
+        return movieData;
+    }
 }
