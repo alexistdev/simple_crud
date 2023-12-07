@@ -52,8 +52,8 @@
               <fieldset>
                 <legend>Genre</legend>
                 <select name="" class="form-control" multiple >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
+                  <option value="" *ngFor="let genre of genreList">{{genre.name}}</option>
+
                 </select>
               </fieldset>
             </div>
