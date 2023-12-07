@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -34,5 +35,10 @@ public class GenreImplementation implements GenreService{
                 .build();
         genreRepository.save(result);
         return result;
+    }
+
+    @Override
+    public List<Genre> getAll() throws Exception {
+        return genreRepository.findAll();
     }
 }
