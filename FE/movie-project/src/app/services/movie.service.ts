@@ -6,6 +6,7 @@ import {Genre} from "../models/genre.model";
 
 const movie_url = 'http://localhost:8901/api/lists';
 const genre_url = 'http://localhost:8901/api/genre';
+const movie_create_url = 'http://localhost:8901/api/movie';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class MovieService {
 
   getGenre(): Observable<Genre[]>{
     return this.http.get<Genre[]>(genre_url);
+  }
+
+  create(data: any): Observable<any> {
+    return this.http.post(movie_create_url, data);
   }
 }
