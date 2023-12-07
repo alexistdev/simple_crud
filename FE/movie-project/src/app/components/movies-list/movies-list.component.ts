@@ -14,7 +14,8 @@ export class MoviesListComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService) {
+  }
 
   ngOnInit(): void {
     this.getDataMovies();
@@ -25,10 +26,22 @@ export class MoviesListComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.movieslist = result;
-          console.log();
         },
         error: (e) => console.error(e)
       });
+  }
+
+  filterResults(text: string) {
+    if (text != "") {
+      if (this.movieslist) {
+        this.movieslist = this.movieslist.filter(
+          movieslist => movieslist?.title?.toLowerCase().includes(text.toLowerCase())
+        );
+      }
+    } else {
+      this.getDataMovies();
+    }
+
   }
 
   setActiveMovie(movie: Movie, index: number): void {
