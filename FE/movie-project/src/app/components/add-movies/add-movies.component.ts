@@ -2,6 +2,7 @@ import { Component ,OnInit } from '@angular/core';
 import {Genre} from "../../models/genre.model";
 import {MovieService} from "../../services/movie.service";
 import {Movie} from "../../models/movie.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-movies',
@@ -20,7 +21,7 @@ export class AddMoviesComponent implements OnInit {
   }
   submitted = false;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService,private router: Router) {
   }
   ngOnInit(): void {
     this.getDataGenre();
@@ -49,6 +50,7 @@ export class AddMoviesComponent implements OnInit {
         next: (res) => {
           this.submitted = true;
           this.newMovie();
+          this.router.navigate(['/movies']);
         },
         error: (e) => console.error(e)
       });
