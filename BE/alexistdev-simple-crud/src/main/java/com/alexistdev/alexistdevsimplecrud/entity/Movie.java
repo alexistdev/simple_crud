@@ -13,7 +13,8 @@ import java.util.List;
 public class Movie {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @NotEmpty(message = "Name is required")
     @Column(name="title",unique = true)
@@ -27,7 +28,11 @@ public class Movie {
     @Column(name="summary",columnDefinition="CHAR(100)")
     private String summary;
 
-//    @ManyToMany
-//    private List<Genre> genre;
+    @ManyToMany
+    @JoinTable(
+            name = "movies_genres",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private List<Genre> genres;
 
 }
