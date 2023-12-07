@@ -2,11 +2,13 @@ package com.alexistdev.alexistdevsimplecrud.service;
 
 import com.alexistdev.alexistdevsimplecrud.entity.Movie;
 import com.alexistdev.alexistdevsimplecrud.repository.MovieRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class MovieImplementation implements MovieService{
     @Autowired
@@ -40,5 +42,13 @@ public class MovieImplementation implements MovieService{
         movieData.setTitle(movie.getTitle());
         movieRepository.save(movieData);
         return movieData;
+    }
+
+    @Override
+    public List<Movie> findByFilter(String filter) throws Exception {
+        List<Movie> result = movieRepository.findByTitleContaining(filter);
+        log.info(result.toString());
+        log.info(filter);
+        return result;
     }
 }

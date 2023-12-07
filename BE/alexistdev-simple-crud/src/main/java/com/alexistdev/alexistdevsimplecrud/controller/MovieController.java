@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -21,6 +22,7 @@ public class MovieController {
     public static final String MOVIE ="/movie";
 
     public static final String GET_MOVIE_LISTS = "/lists";
+    public static final String GET_MOVIE_LISTS_FILTER = "/lists/filter";
 
     @Autowired
     private MovieService movieService;
@@ -52,7 +54,6 @@ public class MovieController {
             responseData.setMessages(ResourceBundle.getBundle("message").getString("success"));
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
         } catch (Exception e) {
-//            responseData.setMessages(ResourceBundle.getBundle("message").getString("failed"));
             responseData.setMessages(e.getMessage());
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
         }
@@ -62,6 +63,22 @@ public class MovieController {
     public ResponseEntity<List<Movie>> getMovie() throws Exception {
         ResponseData<List<Movie>> responseData= new ResponseData<>();
         List<Movie> result = movieService.getAll();
+        if(result.isEmpty()){
+            responseData.setStatus(false);
+            responseData.setData(result);
+            responseData.setMessages(ResourceBundle.getBundle("message").getString("empty"));
+            return new ResponseEntity<List<Movie>>(result, HttpStatus.NO_CONTENT);
+        }
+        responseData.setStatus(true);
+        responseData.setData(result);
+        return new ResponseEntity<List<Movie>>(result, HttpStatus.CREATED);
+    }
+
+    @GetMapping(value = GET_MOVIE_LISTS_FILTER,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Movie>> getByFilter(@RequestParam(name = "filter",defaultValue = "") String filter) throws Exception{
+        log.info(filter);
+        ResponseData<List<Movie>> responseData= new ResponseData<>();
+        List<Movie> result = movieService.findByFilter(filter);
         if(result.isEmpty()){
             responseData.setStatus(false);
             responseData.setData(result);
