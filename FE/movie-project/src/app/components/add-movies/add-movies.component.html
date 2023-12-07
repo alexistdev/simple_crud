@@ -1,1 +1,66 @@
-<p>add-movies works!</p>
+<h1>Movies Collection</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+
+          <div class="col-lg-12 text-end">
+            <a routerLink="/movies"><button class="btn btn-danger m-1">BACK</button></a>
+            <button class="btn btn-primary m-1">SAVE</button>
+          </div>
+        </div>
+        <form>
+          <div class="row mt-5">
+            <div class="col-lg-12">
+              <fieldset>
+                <legend>Title</legend>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Input Title"
+                />
+              </fieldset>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-lg-12">
+              <fieldset>
+                <legend>Director</legend>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Input Director"
+                />
+              </fieldset>
+
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-lg-12">
+              <fieldset>
+                <legend>Summary</legend>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  placeholder="Input Director"
+                ></textarea>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row mt-5">
+            <div class="col-lg-12">
+              <fieldset>
+                <legend>Genre</legend>
+                <select name="" class="form-control" multiple >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </fieldset>
+            </div>
+          </div>
+        </form>
+
+    </div>
+  </div>
+</div>
+
