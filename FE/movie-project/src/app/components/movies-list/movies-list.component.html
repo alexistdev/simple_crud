@@ -1,0 +1,14 @@
+<div class="col-md-6">
+  <h4>Tutorials List</h4>
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let mov of movieslist; let i = index"
+      [class.active]="i == currentIndex"
+      (click)="setActiveMovie(mov, i)"
+    >
+      {{ mov.title }}
+    </li>
+  </ul>
+
+</div>

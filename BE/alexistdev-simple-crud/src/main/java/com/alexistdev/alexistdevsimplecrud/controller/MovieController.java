@@ -59,18 +59,18 @@ public class MovieController {
     }
 
     @GetMapping(value = GET_MOVIE_LISTS)
-    public ResponseEntity<?> getMovie() throws Exception {
+    public ResponseEntity<List<Movie>> getMovie() throws Exception {
         ResponseData<List<Movie>> responseData= new ResponseData<>();
         List<Movie> result = movieService.getAll();
         if(result.isEmpty()){
             responseData.setStatus(false);
             responseData.setData(result);
             responseData.setMessages(ResourceBundle.getBundle("message").getString("empty"));
-            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<Movie>>(result, HttpStatus.NO_CONTENT);
         }
         responseData.setStatus(true);
         responseData.setData(result);
-        return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
+        return new ResponseEntity<List<Movie>>(result, HttpStatus.CREATED);
     }
 
 }
