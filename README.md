@@ -11,7 +11,26 @@
 - Jalankan Xampp dan Buat database kosong dengan nama: movie
 - ketik di terminal : mvn install
 - Jalankan springboot : springboot:run
-- Buka postman dan test dengan menjalankan tambah user [get] localhost:8091/api/lists
+- Buka postman dan test dengan menjalankan tambah movie [post] localhost:8091/api/movie
+- isi body dengan format json:
+
+  <pre>
+    {
+    "title" : "Transformer: Rise of Beasts",
+    "director": "Steven Caple Jr.",
+    "summary" : "Kembali ke aksi dan tontonan yang telah memikat penonton bioskop di seluruh dunia",
+    "genres" : [
+            {
+                "id":1,
+                "name" : "Action"
+            },
+            {
+                "id":4,
+                "name" : "Sci-Fi"
+            }
+    ]
+},
+  </pre>
 
 ## Installasi Angular:
 - git clone
