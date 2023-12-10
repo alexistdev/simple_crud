@@ -50,14 +50,13 @@
       <td>Menambah data Movie</td>
       <td>
         <pre>
-              {
-                  "name":"admin2",
-                  "description":"administrator",
-                  "status": "1",
-                  "createdBy": "admin",
-                  "modifiedBy": "admin"
-              }
-          </pre>
+          {
+                "title" : "TTTTT",
+                "director": "ttasd",
+                "summary" : "Transformer 3223232",
+                "genres" : [{"id":4, "name" : "Sci-Fi"}]    
+          }
+        </pre>
       </td>
     </tr>
      <tr>
@@ -73,18 +72,13 @@
       <td>PATCH</td>
       <td>Update data Movie</td>
       <td>
-        <pre>
-              {
-                  "title" : "TTTTT",
-                  "director": "ttasd",
-                  "summary" : "Transformer 3223232",
-                  "genres" : [
-                          {
-                              "id":4,
-                              "name" : "Sci-Fi"
-                          }
-                  ]
-              }
+         <pre>
+          {
+                "title" : "TTTTT",
+                "director": "ttasd",
+                "summary" : "Transformer 3223232",
+                "genres" : [{"id":4, "name" : "Sci-Fi"}]    
+          }
         </pre>
     </tr>
   </tbody>
