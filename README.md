@@ -11,7 +11,7 @@
 - Jalankan Xampp dan Buat database kosong dengan nama: movie
 - ketik di terminal : mvn install
 - Jalankan springboot : springboot:run
-- Buka postman dan test dengan menjalankan tambah user [get] localhost:8000/api/lists
+- Buka postman dan test dengan menjalankan tambah user [get] localhost:8091/api/lists
 
 ## Installasi Angular:
 - git clone
