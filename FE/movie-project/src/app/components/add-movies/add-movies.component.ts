@@ -43,8 +43,9 @@ export class AddMoviesComponent implements OnInit {
       title: this.movie.title,
       director: this.movie.director,
       summary: this.movie.summary,
-      // genres: this.movie.genres
+      genres: this.genreSelected
     };
+    // console.log(this.genreSelected);
     this.movieService.create(data)
       .subscribe({
         next: (res) => {
@@ -56,12 +57,15 @@ export class AddMoviesComponent implements OnInit {
       });
   }
 
-  // onSelectedGenre(value: number):void {
-  //   // if (this.genreSelected) {
-  //   //   this.genreSelected.push(value);
-  //   //   console.log(this.genreSelected.toString());
-  //   // }
-  // }
+  onSelectedGenre(value: any):void {
+    // if (this.genreSelected) {
+    //   this.genreSelected.push(value);
+    // }
+
+    for(let i=0; i<value.length;i++){
+      console.log(value[i].target.value);
+    }
+  }
 
   newMovie():void {
     this.submitted = false;

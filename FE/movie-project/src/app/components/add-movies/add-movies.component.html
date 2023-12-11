@@ -9,7 +9,7 @@
             <button class="btn btn-primary m-1" (click)="saveTutorial()">SAVE</button>
           </div>
         </div>
-        <form>
+
           <div class="row mt-5">
             <div class="col-lg-12">
               <fieldset>
@@ -21,6 +21,7 @@
                   [(ngModel)]="movie.title"
                   class="form-control"
                   placeholder="Input Title"
+                  [ngModelOptions]="{standalone: true}"
                 />
               </fieldset>
             </div>
@@ -36,6 +37,7 @@
                   name="director"
                   id="director"
                   [(ngModel)]="movie.director"
+                  [ngModelOptions]="{standalone: true}"
                 />
               </fieldset>
 
@@ -51,6 +53,7 @@
                   name="summary"
                   id="summary"
                   [(ngModel)]="movie.summary"
+                  [ngModelOptions]="{standalone: true}"
                 ></textarea>
               </fieldset>
             </div>
@@ -59,14 +62,13 @@
             <div class="col-lg-12">
               <fieldset>
                 <legend>Genre</legend>
-                <select  class="form-control" multiple  >
-                  <option *ngFor="let genre of genreList" value="{{genre.id}}" >{{genre.name}}</option>
-
+                <select  (change)="onSelectedGenre($event.target.value)"  name="genres" class="form-control multiselect-select-all"
+                multiple="multiple">
+                  <option *ngFor="let item of genreList" value="{{item}}" >{{item.name}}</option>
                 </select>
               </fieldset>
             </div>
           </div>
-        </form>
 
     </div>
   </div>
