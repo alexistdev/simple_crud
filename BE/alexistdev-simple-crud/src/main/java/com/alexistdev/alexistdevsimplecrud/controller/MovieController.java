@@ -1,6 +1,9 @@
 package com.alexistdev.alexistdevsimplecrud.controller;
 
 import com.alexistdev.alexistdevsimplecrud.commonresponse.ResponseData;
+import com.alexistdev.alexistdevsimplecrud.dao.MovieRequest;
+import com.alexistdev.alexistdevsimplecrud.dao.MovieResponse;
+import com.alexistdev.alexistdevsimplecrud.entity.Genre;
 import com.alexistdev.alexistdevsimplecrud.entity.Movie;
 import com.alexistdev.alexistdevsimplecrud.service.MovieService;
 import jakarta.validation.Valid;
@@ -21,6 +24,8 @@ public class MovieController {
 
     public static final String MOVIE ="/movie";
 
+    public static final String GET_BY_ID ="/movie";
+
     public static final String GET_MOVIE_LISTS = "/lists";
     public static final String GET_MOVIE_LISTS_FILTER = "/lists/filter";
 
@@ -28,11 +33,11 @@ public class MovieController {
     private MovieService movieService;
 
     @PostMapping(value=MOVIE)
-    public ResponseEntity<?> created(@Valid @RequestBody Movie movie){
+    public ResponseEntity<?> created(@Valid @RequestBody MovieRequest request){
         ResponseData<Movie> responseData= new ResponseData<>();
         responseData.setStatus(false);
         try {
-            Movie result = movieService.save(movie);
+            Movie result = movieService.save(request);
             responseData.setStatus(true);
             responseData.setData(result);
             responseData.setMessages(ResourceBundle.getBundle("message").getString("success"));

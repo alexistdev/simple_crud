@@ -1,11 +1,16 @@
 package com.alexistdev.alexistdevsimplecrud.service;
 
+import com.alexistdev.alexistdevsimplecrud.dao.MovieRequest;
+import com.alexistdev.alexistdevsimplecrud.dao.MovieResponse;
+import com.alexistdev.alexistdevsimplecrud.entity.Genre;
 import com.alexistdev.alexistdevsimplecrud.entity.Movie;
+import com.alexistdev.alexistdevsimplecrud.repository.GenreRepository;
 import com.alexistdev.alexistdevsimplecrud.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -14,13 +19,22 @@ public class MovieImplementation implements MovieService{
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private GenreRepository genreRepository;
+
     @Override
-    public Movie save(Movie movie) throws Exception {
+    public Movie save(MovieRequest movie) throws Exception {
         Movie created = new Movie();
+        List<Genre> genreList = new ArrayList<>();
+        for(String a: movie.getGenres()){
+            Genre tempGenre = new Genre();
+            tempGenre = genreRepository.findById(Integer.parseInt(a)).orElse(null);
+            genreList.add(tempGenre);
+        }
         created.setTitle(movie.getTitle());
         created.setDirector(movie.getDirector());
         created.setSummary(movie.getSummary());
-        created.setGenres(movie.getGenres());
+        created.setGenres(genreList);
         movieRepository.save(created);
         return created;
     }

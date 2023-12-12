@@ -2,7 +2,6 @@ package com.alexistdev.alexistdevsimplecrud.controller;
 
 import com.alexistdev.alexistdevsimplecrud.commonresponse.ResponseData;
 import com.alexistdev.alexistdevsimplecrud.entity.Genre;
-import com.alexistdev.alexistdevsimplecrud.entity.Movie;
 import com.alexistdev.alexistdevsimplecrud.service.GenreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
