@@ -1,6 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import {Movie} from "../../models/movie.model";
 import {MovieService} from "../../services/movie.service";
+import {Moviepayload} from "../../models/moviepayload.model";
 
 @Component({
   selector: 'app-movies-list',
@@ -9,8 +10,8 @@ import {MovieService} from "../../services/movie.service";
 })
 export class MoviesListComponent implements OnInit {
 
-  movieslist?: Movie[];
-  currentMovie: Movie = {};
+  movieslist?: Moviepayload[];
+  currentMovie: Moviepayload = {};
   currentIndex = -1;
   title = '';
 
@@ -44,7 +45,7 @@ export class MoviesListComponent implements OnInit {
 
   }
 
-  setActiveMovie(movie: Movie, index: number): void {
+  setActiveMovie(movie: Moviepayload, index: number): void {
     this.currentMovie = movie;
     this.currentIndex = index;
   }

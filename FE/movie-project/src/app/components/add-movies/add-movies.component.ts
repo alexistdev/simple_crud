@@ -11,7 +11,8 @@ import {Router} from "@angular/router";
 })
 export class AddMoviesComponent implements OnInit {
   genreList?: Genre[];
-  genreSelected?: Genre[];
+  genreSelected: string[] = [];
+  isUpdate: boolean =false;
 
   movie: Movie = {
     title: '',
@@ -20,6 +21,7 @@ export class AddMoviesComponent implements OnInit {
     genres:[]
   }
   submitted = false;
+
 
   constructor(private movieService: MovieService,private router: Router) {
   }
@@ -32,7 +34,6 @@ export class AddMoviesComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.genreList = result;
-          // console.log(result);
         },
         error: (e) => console.error(e)
       });
@@ -45,10 +46,11 @@ export class AddMoviesComponent implements OnInit {
       summary: this.movie.summary,
       genres: this.genreSelected
     };
-    // console.log(this.genreSelected);
+
     this.movieService.create(data)
       .subscribe({
         next: (res) => {
+          console.log(data);
           this.submitted = true;
           this.newMovie();
           this.router.navigate(['/movies']);
@@ -57,18 +59,17 @@ export class AddMoviesComponent implements OnInit {
       });
   }
 
-  onSelectedGenre(value: any):void {
-    // if (this.genreSelected) {
-    //   this.genreSelected.push(value);
-    // }
-
-    for(let i=0; i<value.length;i++){
-      console.log(value[i].target.value);
+  onSelectedGenre(item: any) {
+    let genreId = item.target.value;
+    if(!this.genreSelected.find(el => el == genreId)){
+      this.genreSelected.push(genreId);
     }
+      console.log(this.genreSelected);
+
   }
 
   newMovie():void {
-    this.submitted = false;
+    this.isUpdate = false;
     this.movie = {
       title: '',
       director:'',

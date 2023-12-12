@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from "../models/movie.model";
 import {Genre} from "../models/genre.model";
+import {Moviepayload} from "../models/moviepayload.model";
 
 const movie_url = 'http://localhost:8901/api/lists';
 const genre_url = 'http://localhost:8901/api/genre';
@@ -15,8 +16,8 @@ export class MovieService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(movie_url);
+  getAll(): Observable<Moviepayload[]> {
+    return this.http.get<Moviepayload[]>(movie_url);
   }
 
   getGenre(): Observable<Genre[]>{
@@ -26,4 +27,5 @@ export class MovieService {
   create(data: any): Observable<any> {
     return this.http.post(movie_create_url, data);
   }
+
 }
