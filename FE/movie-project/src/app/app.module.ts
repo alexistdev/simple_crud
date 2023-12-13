@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { EditMoviesComponent } from './components/edit-movies/edit-movies.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EditMoviesComponent } from './components/edit-movies/edit-movies.compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

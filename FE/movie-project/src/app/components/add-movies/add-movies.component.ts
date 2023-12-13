@@ -3,6 +3,7 @@ import {Genre} from "../../models/genre.model";
 import {MovieService} from "../../services/movie.service";
 import {Movie} from "../../models/movie.model";
 import {Router} from "@angular/router";
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-add-movies',
@@ -13,6 +14,12 @@ export class AddMoviesComponent implements OnInit {
   genreList?: Genre[];
   genreSelected: string[] = [];
   isUpdate: boolean =false;
+
+  dropdownList?: {
+    'item_id': number ,
+    'item_text': string
+  }[]=[];
+  dropdownSettings:IDropdownSettings={};
 
   movie: Movie = {
     title: '',
@@ -27,6 +34,42 @@ export class AddMoviesComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getDataGenre();
+    this.dropdownSettings = {
+      idField: 'id',
+      textField: 'item_text',
+    };
+  }
+
+  onItemDeSelect(item: any){
+    let genreId = item.id;
+    for(let i=0; i < this.genreSelected.length ;i++){
+      if(this.genreSelected[i] == genreId){
+        this.genreSelected.splice(i,1);
+      }
+    }
+  }
+
+  onItemSelect(item: any) {
+    let genreId = item.id;
+    if(!this.genreSelected.find(el => el == genreId)){
+      this.genreSelected.push(genreId);
+    }
+  }
+
+  onSelectAll(items: any) {
+    if(items.length > 0){
+      for(let i=0 ; i < items.length ; i++){
+        let genreId = items[i].id;
+        if(!this.genreSelected.find(el => el == genreId)){
+          this.genreSelected.push(genreId);
+        }
+      }
+    }
+  }
+
+  onUnSelectAll() {
+    this.genreSelected = [];
+    console.log(this.genreSelected);
   }
 
   getDataGenre(): void {
@@ -57,15 +100,6 @@ export class AddMoviesComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
-  }
-
-  onSelectedGenre(item: any) {
-    let genreId = item.target.value;
-    if(!this.genreSelected.find(el => el == genreId)){
-      this.genreSelected.push(genreId);
-    }
-      console.log(this.genreSelected);
-
   }
 
   newMovie():void {
