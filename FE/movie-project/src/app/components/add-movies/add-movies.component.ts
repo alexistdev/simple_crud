@@ -11,14 +11,9 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrl: './add-movies.component.css'
 })
 export class AddMoviesComponent implements OnInit {
-  genreList?: Genre[];
+  genreList?: any;
   genreSelected: string[] = [];
-  isUpdate: boolean =false;
 
-  dropdownList?: {
-    'item_id': number ,
-    'item_text': string
-  }[]=[];
   dropdownSettings:IDropdownSettings={};
 
   movie: Movie = {
@@ -27,6 +22,7 @@ export class AddMoviesComponent implements OnInit {
     summary:'',
     genres:[]
   }
+
   submitted = false;
 
 
@@ -36,7 +32,7 @@ export class AddMoviesComponent implements OnInit {
     this.getDataGenre();
     this.dropdownSettings = {
       idField: 'id',
-      textField: 'item_text',
+      textField: 'name',
     };
   }
 
@@ -76,24 +72,25 @@ export class AddMoviesComponent implements OnInit {
     this.movieService.getGenre()
       .subscribe({
         next: (result) => {
-          this.genreList = result;
+          // this.genreList = result;
+          this.genreList = result?.map((item: Genre) => item).filter((y) => y !== undefined) ?? [];
         },
         error: (e) => console.error(e)
       });
   }
 
   saveTutorial(): void {
-    const data = {
+    const dataMovie = {
       title: this.movie.title,
       director: this.movie.director,
       summary: this.movie.summary,
       genres: this.genreSelected
     };
 
-    this.movieService.create(data)
+    this.movieService.create(dataMovie)
       .subscribe({
         next: (res) => {
-          console.log(data);
+          console.log(dataMovie);
           this.submitted = true;
           this.newMovie();
           this.router.navigate(['/movies']);
@@ -103,7 +100,6 @@ export class AddMoviesComponent implements OnInit {
   }
 
   newMovie():void {
-    this.isUpdate = false;
     this.movie = {
       title: '',
       director:'',

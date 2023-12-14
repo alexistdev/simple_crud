@@ -64,13 +64,7 @@
                 <legend>Genre</legend>
                 <ng-multiselect-dropdown
                   [settings]="dropdownSettings"
-                  [data] = "[
-                { id: 1, item_text: 'Drama' },
-                { id: 2, item_text: 'Action' },
-                { id: 3, item_text: 'Animation' },
-                { id: 4, item_text: 'Sci-Fi' },
-                { id: 5, item_text: 'Horor' }
-                ]"
+                  [data] = "genreList"
                   (onDeSelect)="onItemDeSelect($event)"
                   (onSelect)="onItemSelect($event)"
                   (onSelectAll)="onSelectAll($event)"
