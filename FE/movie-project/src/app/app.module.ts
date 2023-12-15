@@ -9,22 +9,24 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { EditMoviesComponent } from './components/edit-movies/edit-movies.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {ModalDirective, ModalModule} from "ngx-bootstrap/modal";
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesListComponent,
     AddMoviesComponent,
-    EditMoviesComponent,
+    EditMoviesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ModalModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [],
+  providers: [ModalDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

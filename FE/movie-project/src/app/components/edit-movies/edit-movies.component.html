@@ -1,1 +1,100 @@
-<p>edit-movies works!</p>
+<h1>Movies Collection</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+
+        <div class="col-lg-12 text-end">
+          <a routerLink="/movies"><button class="btn btn-danger m-1"><i class="fa-solid fa-circle-chevron-left"></i></button></a>
+          <button class="btn btn-primary m-1"><i class="fa-solid fa-floppy-disk"></i> UPDATE</button>
+          <button class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModalDelete()"><i class="fa-solid fa-trash"></i> DELETE</button>
+        </div>
+      </div>
+
+
+      <div class="row mt-5">
+        <div class="col-lg-12">
+          <fieldset>
+            <legend>Title</legend>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              [(ngModel)]="movieData!.title"
+              class="form-control"
+              placeholder="Input Title"
+              [ngModelOptions]="{standalone: true}"
+            />
+          </fieldset>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-lg-12">
+          <fieldset>
+            <legend>Director</legend>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Input Director"
+              name="director"
+              id="director"
+              [(ngModel)]="movieData!.director"
+              [ngModelOptions]="{standalone: true}"
+            />
+          </fieldset>
+
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-lg-12">
+          <fieldset>
+            <legend>Summary</legend>
+            <textarea
+              type="text"
+              class="form-control"
+              name="summary"
+              id="summary"
+              [(ngModel)]="movieData!.summary"
+              [ngModelOptions]="{standalone: true}"
+            ></textarea>
+          </fieldset>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-lg-12">
+          <fieldset>
+            <legend>Genre</legend>
+<!--            <ng-multiselect-dropdown-->
+<!--              [settings]="dropdownSettings"-->
+<!--              [data] = ""-->
+<!--            >-->
+<!--            </ng-multiselect-dropdown>-->
+          </fieldset>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div>
+
+  </div>
+</div>
+<!-- Modal -->
+<div bsModal #modalDelete="bs-modal" id="modalDelete" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Hapus Data</h4>
+      </div>
+      <div class="modal-body">
+        Apakah anda yakin ingin menghapus data ini?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="hideModalDelete()">Cancel</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete(movieData!.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+

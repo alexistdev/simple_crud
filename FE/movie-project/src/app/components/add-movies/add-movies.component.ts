@@ -65,7 +65,6 @@ export class AddMoviesComponent implements OnInit {
 
   onUnSelectAll() {
     this.genreSelected = [];
-    console.log(this.genreSelected);
   }
 
   getDataGenre(): void {

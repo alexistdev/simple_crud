@@ -1,8 +1,9 @@
+import {Genre} from "./genre.model";
 
 export class Movie {
   id?: number;
-  title?: string;
+  title?: string ;
   director?: string;
   summary?: string;
-  genres?: string[];
+  genres?: Genre[];
 }

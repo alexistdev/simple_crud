@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import {Movie} from "../../models/movie.model";
 import {MovieService} from "../../services/movie.service";
 import {Moviepayload} from "../../models/moviepayload.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-movies-list',
@@ -15,7 +16,7 @@ export class MoviesListComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService,private router: Router) {
   }
 
   ngOnInit(): void {
@@ -45,9 +46,8 @@ export class MoviesListComponent implements OnInit {
 
   }
 
-  setActiveMovie(movie: Moviepayload, index: number): void {
-    this.currentMovie = movie;
-    this.currentIndex = index;
+  setActiveMovie(movie: Moviepayload): void {
+      this.router.navigateByUrl('/movies/'+movie.id);
   }
 
 }
