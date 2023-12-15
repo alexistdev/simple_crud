@@ -65,4 +65,9 @@ public class MovieImplementation implements MovieService{
         log.info(filter);
         return result;
     }
+
+    @Override
+    public Movie findById(int id) throws Exception {
+        return movieRepository.findById(id).orElse(null);
+    }
 }

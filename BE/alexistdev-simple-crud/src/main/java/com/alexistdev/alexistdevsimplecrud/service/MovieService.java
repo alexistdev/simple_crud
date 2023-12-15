@@ -14,4 +14,6 @@ public interface MovieService {
     Movie update(Movie movie, int id) throws Exception;
 
     List<Movie> findByFilter(String filter) throws Exception;
+
+    Movie findById(int id)throws Exception;
 }

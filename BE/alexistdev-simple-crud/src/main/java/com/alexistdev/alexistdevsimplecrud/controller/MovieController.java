@@ -96,4 +96,24 @@ public class MovieController {
         return new ResponseEntity<List<Movie>>(result, HttpStatus.CREATED);
     }
 
+    @GetMapping(value=GET_BY_ID+"/{id}")
+    public ResponseEntity<?> getMoviesById(@PathVariable int id){
+        ResponseData<Movie> responseData= new ResponseData<>();
+        try{
+            Movie result = movieService.findById(id);
+            if(result != null){
+                responseData.setStatus(true);
+                responseData.setData(result);
+                responseData.setMessages(ResourceBundle.getBundle("message").getString("success"));
+                return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
+            }
+            responseData.setStatus(false);
+            responseData.setMessages(ResourceBundle.getBundle("message").getString("empty"));
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            responseData.setMessages(ResourceBundle.getBundle("message").getString("failed"));
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
