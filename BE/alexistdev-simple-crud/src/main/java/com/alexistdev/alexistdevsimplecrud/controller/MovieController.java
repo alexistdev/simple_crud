@@ -116,4 +116,16 @@ public class MovieController {
         }
     }
 
+    @DeleteMapping(value=GET_BY_ID+"/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id){
+        ResponseData<Movie> responseData= new ResponseData<>();
+        try{
+            movieService.delete(id);
+            responseData.setMessages(ResourceBundle.getBundle("message").getString("success"));
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
+        } catch (Exception e) {
+            responseData.setMessages(ResourceBundle.getBundle("message").getString("failed"));
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -70,4 +70,13 @@ public class MovieImplementation implements MovieService{
     public Movie findById(int id) throws Exception {
         return movieRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void delete(int id) throws Exception {
+        Movie result = movieRepository.findById(id).orElse(null);
+        if(result == null){
+            throw new RuntimeException("Not Found");
+        }
+        movieRepository.delete(result);
+    }
 }
