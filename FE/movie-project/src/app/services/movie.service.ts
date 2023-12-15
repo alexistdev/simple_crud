@@ -35,4 +35,9 @@ export class MovieService {
     return this.http.get<ResponseData>(movie_get_by_id);
   }
 
+  deleteById(id?:number):Observable<ResponseData>{
+    let movie_delete_by_id = 'http://localhost:8901/api/movie/'+ id;
+    return this.http.delete<ResponseData>(movie_delete_by_id);
+  }
+
 }

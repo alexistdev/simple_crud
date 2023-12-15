@@ -2,9 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Movie} from "../../models/movie.model";
 import {MovieService} from "../../services/movie.service";
-import {BsModalService, ModalDirective, ModalOptions} from 'ngx-bootstrap/modal';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 import {IDropdownSettings} from "ng-multiselect-dropdown";
-import {document} from "ngx-bootstrap/utils";
 
 @Component({
   selector: 'app-edit-movies',
@@ -17,9 +16,6 @@ export class EditMoviesComponent {
   idMovie?: string | null;
   genreSelected?: string[] = [];
   dropdownSettings:IDropdownSettings={};
-  config?: ModalOptions;
-
-  showModal = false;
 
   @ViewChild('modalDelete') public modalDelete?:ModalDirective;
 
@@ -34,8 +30,6 @@ export class EditMoviesComponent {
     this.getById(Number(this.idMovie));
   }
 
-
-
   getById(id:number):void{
     this.movieService.getById(id)
       .subscribe({
@@ -49,11 +43,18 @@ export class EditMoviesComponent {
   }
 
   delete(id:number | undefined):void{
+    if(id != undefined){
+      this.movieService.deleteById(id)
+        .subscribe({
+          next: (result) => {
+          },
+          error: (e) => console.error(e)
+        });
+    }
     this.route2.navigate(['/movies']);
     if (this.modalDelete instanceof ModalDirective) {
       this.modalDelete.hide();
     }
-    console.log(id);
   }
 
   showModalDelete(): void {
@@ -67,5 +68,6 @@ export class EditMoviesComponent {
       this.modalDelete.hide();
     }
   }
+
 
 }

@@ -23,6 +23,12 @@ export class MoviesListComponent implements OnInit {
     this.getDataMovies();
   }
 
+  ngAfterViewInit():void {
+    this.getDataMovies();
+  }
+
+
+
   getDataMovies(): void {
     this.movieService.getAll()
       .subscribe({
@@ -43,7 +49,6 @@ export class MoviesListComponent implements OnInit {
     } else {
       this.getDataMovies();
     }
-
   }
 
   setActiveMovie(movie: Moviepayload): void {
