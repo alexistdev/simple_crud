@@ -45,13 +45,19 @@ public class MovieImplementation implements MovieService{
     }
 
     @Override
-    public Movie update(Movie movie, int id) throws Exception {
+    public Movie update(MovieRequest movie, int id) throws Exception {
         Movie movieData = movieRepository.findById(id).orElse(null);
+        List<Genre> genreList = new ArrayList<>();
         if(movieData == null){
            throw new Exception("Not Found");
         }
+        for(String a: movie.getGenres()){
+            Genre tempGenre = new Genre();
+            tempGenre = genreRepository.findById(Integer.parseInt(a)).orElse(null);
+            genreList.add(tempGenre);
+        }
         movieData.setSummary(movie.getSummary());
-        movieData.setGenres(movie.getGenres());
+        movieData.setGenres(genreList);
         movieData.setDirector(movie.getDirector());
         movieData.setTitle(movie.getTitle());
         movieRepository.save(movieData);

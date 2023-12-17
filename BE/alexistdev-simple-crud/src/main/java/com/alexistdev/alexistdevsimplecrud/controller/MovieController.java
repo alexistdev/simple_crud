@@ -50,17 +50,17 @@ public class MovieController {
     }
 
     @PatchMapping(value = MOVIE+"/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Movie movie, @PathVariable int id){
+    public ResponseEntity<?> update(@Valid @RequestBody MovieRequest request, @PathVariable int id){
         ResponseData<Movie> responseData = new ResponseData<>();
         responseData.setStatus(false);
         try{
-            Movie result = movieService.update(movie,id);
+            Movie result = movieService.update(request,id);
             responseData.setStatus(true);
             responseData.setData(result);
             responseData.setMessages(ResourceBundle.getBundle("message").getString("success"));
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
         } catch (Exception e) {
-            responseData.setMessages(e.getMessage());
+            responseData.setMessages(ResourceBundle.getBundle("message").getString("failed"));
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
         }
     }

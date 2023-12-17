@@ -11,7 +11,7 @@ public interface MovieService {
 
     List<Movie> getAll() throws Exception;
 
-    Movie update(Movie movie, int id) throws Exception;
+    Movie update(MovieRequest movie, int id) throws Exception;
 
     List<Movie> findByFilter(String filter) throws Exception;
 
