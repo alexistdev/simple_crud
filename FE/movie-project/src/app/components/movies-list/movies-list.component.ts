@@ -1,20 +1,21 @@
-import { Component, OnInit  } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Movie} from "../../models/movie.model";
 import {MovieService} from "../../services/movie.service";
 import {Moviepayload} from "../../models/moviepayload.model";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
   styleUrl: './movies-list.component.css'
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent implements OnInit,OnDestroy {
 
   movieslist?: Moviepayload[];
-  currentMovie: Moviepayload = {};
   currentIndex = -1;
   title = '';
+  subs?: Subscription = new Subscription();
 
   constructor(private movieService: MovieService,private router: Router) {
   }
@@ -23,14 +24,12 @@ export class MoviesListComponent implements OnInit {
     this.getDataMovies();
   }
 
-  ngAfterViewInit():void {
+  ngAfterViewInit():void{
     this.getDataMovies();
   }
 
-
-
   getDataMovies(): void {
-    this.movieService.getAll()
+    this.subs = this.movieService.getAll()
       .subscribe({
         next: (result) => {
           this.movieslist = result;
@@ -54,5 +53,11 @@ export class MoviesListComponent implements OnInit {
   setActiveMovie(movie: Moviepayload): void {
       this.router.navigateByUrl('/movies/'+movie.id);
   }
+
+  ngOnDestroy(): void {
+    this.subs?.unsubscribe();
+  }
+
+
 
 }

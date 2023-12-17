@@ -40,4 +40,9 @@ export class MovieService {
     return this.http.delete<ResponseData>(movie_delete_by_id);
   }
 
+  updateMovie(data:any, id?:number):Observable<ResponseData>{
+    let movie_delete_by_id = 'http://localhost:8901/api/movie/'+ id;
+    return this.http.patch<ResponseData>(movie_delete_by_id,data);
+  }
+
 }
