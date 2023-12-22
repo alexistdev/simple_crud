@@ -43,6 +43,7 @@ export class AddMoviesComponent implements OnInit {
         this.genreSelected.splice(i,1);
       }
     }
+    console.log(this.genreSelected);
   }
 
   onItemSelect(item: any) {
